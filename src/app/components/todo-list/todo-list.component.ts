@@ -1,41 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import {TodoDataService} from "../../services/todo-data.service";
+import {Todo} from "../../todo";
 
 @Component({
   selector: 'todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
+  providers: [TodoDataService]
 })
 export class TodoListComponent implements OnInit {
-  todos: object[];
+  newTodo: Todo = new Todo();
 
-  constructor() { }
-
-  ngOnInit() {
-    this.todos = [
-      {
-        'id': 1,
-        'title': 'task1',
-        'completed': false,
-        'editing': false
-
-
-      },
-      {
-        'id': 2,
-        'title': 'task2',
-        'completed': false,
-        'editing': false
-
-
-      },
-      {
-        'id': 3,
-        'title': 'task3',
-        'completed': false,
-        'editing': false
-      }
-
-    ];
+  constructor(private todoDataService: TodoDataService){
 
   }
+
+  addTodo(){
+    this.todoDataService.addTodo(this.newTodo);
+    this.newTodo=new Todo();
+  }
+
+  toggleTodoComplete(todo){
+    this.todoDataService.toggleTodoComplete(todo);
+  }
+
+  removeTodo(id){
+    this.todoDataService.deleteTodoById(id);
+  }
+
+  get todos(){
+    return this.todoDataService.getAllTodod();
+  }
+
+  ngOnInit(): void {
+  }
+
 }
