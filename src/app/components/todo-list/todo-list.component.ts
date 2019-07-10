@@ -16,8 +16,10 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo(){
-    this.todoDataService.addTodo(this.newTodo);
-    this.newTodo=new Todo();
+    if(this.newTodo.title){
+      this.todoDataService.addTodo(this.newTodo);
+      this.newTodo=new Todo();
+    }
   }
 
   toggleTodoComplete(todo){

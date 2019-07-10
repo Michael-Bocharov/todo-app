@@ -2,9 +2,7 @@
   <h1>
     Todos
   </h1>
-  <label>
-    <input class="new-todo" placeholder="What need to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()" >
-  </label>
+  <input class="new-todo" placeholder="What need to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()" >
   <section class="main" *ngIf="todos.length >0">
     <ul class="todo-list">
       <li *ngFor="let todo of todos" [class.completed]="todo.complete">
